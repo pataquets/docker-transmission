@@ -1,0 +1,9 @@
+transmission-daemon:
+  container_name: transmission-daemon
+  image: pataquets/transmission-daemon
+  ports:
+    - 127.0.0.1:9091:9091
+    - 51413:51413
+  volumes:
+    - ~/transmission/download:/data/download/:rw
+    - ~/transmission/watch:/data/watch:ro
