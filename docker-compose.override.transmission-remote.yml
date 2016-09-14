@@ -1,0 +1,6 @@
+transmission-remote:
+  container_name: transmission-remote
+  image: pataquets/transmission-remote
+  command: transmission-daemon --no-portmap
+  links:
+    - transmission-daemon
