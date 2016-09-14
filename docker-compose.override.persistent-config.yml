@@ -1,0 +1,3 @@
+transmission-daemon:
+  volumes:
+    - ~/transmission/config/:/root/.config/transmission-daemon/:rw
