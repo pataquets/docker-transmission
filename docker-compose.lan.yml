@@ -1,0 +1,22 @@
+transmission-daemon:
+  extends:
+    file: docker-compose.common.yml
+    service: transmission-daemon
+  command:
+    - "--allowed=*"
+    - "--rpc-bind-address=0.0.0.0"
+    - "--encryption-preferred"
+    - "--dht"
+    - "--utp"
+    - "--lpd"
+    - "--portmap"
+    - "--no-global-seedratio"
+#    - "--auth"
+#    - "--username=transmission"
+#    - "--password=transmission"
+    - "--watch-dir=/root/.config/transmission-daemon/watch/"
+#    - "-d" # Dump transmission-daemon's settings to stderr.
+  net: host
+#  ports:
+#    - 127.0.0.1:9091:9091
+#    - 51413:51413

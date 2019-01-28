@@ -1,0 +1,14 @@
+transmission-daemon:
+  container_name: transmission-daemon
+  image: pataquets/transmission-daemon
+  # Transmission dirs:
+  # For a stateless daemon container, do not mount both 'resume' and
+  # 'torrents' directories.
+  # This way, by just recreating you'll bootstrap a daemon with the
+  # 'watch' dir torrents.
+  # Existing downloaded files will be checked.
+  volumes:
+    - ~/transmission/downloads/:/root/Downloads:rw
+    - ~/transmission/resume/:/root/.config/transmission-daemon/resume/:rw
+    - ~/transmission/torrents/:/root/.config/transmission-daemon/torrents/:rw
+    - ~/transmission/watch/:/root/.config/transmission-daemon/watch/:ro
