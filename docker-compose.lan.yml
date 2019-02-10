@@ -20,3 +20,11 @@ transmission-daemon:
 #  ports:
 #    - 127.0.0.1:9091:9091
 #    - 51413:51413
+
+minidlna:
+  container_name: transmission-minidlna
+  image: pataquets/minidlna
+  command: [ "-d" ]
+  net: host
+  volumes:
+    - ~/transmission/downloads/:/var/lib/minidlna/:ro
