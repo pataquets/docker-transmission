@@ -2,6 +2,7 @@ transmission-daemon:
   extends:
     file: docker-compose.common.yml
     service: transmission-daemon
+  restart: unless-stopped
   command:
     - "--allowed=*"
     - "--rpc-bind-address=0.0.0.0"
@@ -24,6 +25,7 @@ transmission-daemon:
 minidlna:
   container_name: transmission-minidlna
   image: pataquets/minidlna
+  restart: unless-stopped
   command: [ "-d" ]
   net: host
   volumes:
