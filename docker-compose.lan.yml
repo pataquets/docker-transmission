@@ -3,6 +3,9 @@ transmission-daemon:
     file: docker-compose.common.yml
     service: transmission-daemon
   restart: unless-stopped
+  environment:
+    - TRANSMISSION_USER
+    - TRANSMISSION_PASS
   command:
     - "--allowed=*"
     - "--rpc-bind-address=0.0.0.0"
@@ -12,9 +15,9 @@ transmission-daemon:
     - "--lpd"
     - "--portmap"
     - "--no-global-seedratio"
-#    - "--auth"
-#    - "--username=transmission"
-#    - "--password=transmission"
+    - "--auth"
+    - "--username=${TRANSMISSION_USER}"
+    - "--password=${TRANSMISSION_PASS}"
     - "--watch-dir=/root/.config/transmission-daemon/watch/"
 #    - "-d" # Dump transmission-daemon's settings to stderr.
   net: host
