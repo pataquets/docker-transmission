@@ -1,21 +1,25 @@
-FROM pataquets/ubuntu:xenial
+FROM pataquets/ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN \
   apt-get update && \
-  apt-get -y install \
-    gnupg-curl \
+  apt-get install -y --no-install-recommends \
+    ca-certificates \
+    gnupg \
+  && \
+  apt-key adv --keyserver hkps://keyserver.ubuntu.com --recv-keys 976B5901365C5CA1 && \
+  . /etc/lsb-release && \
+  echo "deb http://ppa.launchpad.net/transmissionbt/ppa/ubuntu ${DISTRIB_CODENAME} main" \
+    | tee /etc/apt/sources.list.d/transmissionbt.list \
+  && \
+  apt-get purge -y --autoremove \
+    gnupg \
   && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 RUN \
-  apt-key adv --keyserver hkps://keyserver.ubuntu.com --recv-keys 365C5CA1 && \
-  . /etc/lsb-release && \
-  echo "deb http://ppa.launchpad.net/transmissionbt/ppa/ubuntu ${DISTRIB_CODENAME} main" | \
-    tee /etc/apt/sources.list.d/transmissionbt.list \
-  && \
   apt-get update && \
   apt-get -y install \
     transmission-daemon \
