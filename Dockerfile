@@ -11,7 +11,7 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 RUN \
-  apt-key adv --keyserver hkp://hkps.pool.sks-keyservers.net --recv-keys 365C5CA1 && \
+  apt-key adv --keyserver hkps://keyserver.ubuntu.com --recv-keys 365C5CA1 && \
   echo "deb http://ppa.launchpad.net/transmissionbt/ppa/ubuntu xenial main" | \
     tee /etc/apt/sources.list.d/transmissionbt.list \
   && \
